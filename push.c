@@ -25,6 +25,7 @@ void print_stack(stack_t *stack)
 /**
  * push - Pushes an integer onto the stack
  * @stack: Pointer to the head of the stack
+ * @line: Monty code line
  * @line_number: Line number in the Monty byte code file
  *
  * Description: This function implements the `push` opcode, which pushes an
@@ -32,41 +33,20 @@ void print_stack(stack_t *stack)
  * cannot be converted to an integer, it prints an error message and exits
  * with failure status.
  */
-
-void push(stack_t **stack, unsigned int line_number)
+void push(stack_t **stack, char *line)
 {
-	char *argument = strtok(NULL, " \t\n");
-	int i = 0;
+	int argument = get_argument(line);
 	stack_t *new_node;
-
-	if (argument == NULL)
-	{
-		fprintf(stderr, "L%u: usage: push integer\n", line_number);
-		free_stack(*stack);
-		exit(EXIT_FAILURE);
-	}
-
-	while (argument[i] != '\0')
-	{
-		if (!isdigit(argument[i]) && (i == 0 && argument[i] != '-'))
-		{
-			fprintf(stderr, "L%u: usage: push integer\n", line_number);
-			free_stack(*stack);
-			exit(EXIT_FAILURE);
-		}
-		i++;
-	}
 
 	new_node = malloc(sizeof(stack_t));
 
 	if (new_node == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
-		free_stack(*stack);
 		exit(EXIT_FAILURE);
 	}
 
-	new_node->n = atoi(argument);
+	new_node->n = argument;
 	new_node->prev = NULL;
 	new_node->next = *stack;
 

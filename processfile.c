@@ -33,7 +33,6 @@ int process_file(const char *file_path, stack_t **stack)
 			break;
 		}
 	}
-	pall(stack);
 
 	free(line);
 	fclose(file);
