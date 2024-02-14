@@ -26,7 +26,6 @@ void print_stack(stack_t *stack)
  * push - Pushes an integer onto the stack
  * @stack: Pointer to the head of the stack
  * @line: Monty code line
- * @line_number: Line number in the Monty byte code file
  *
  * Description: This function implements the `push` opcode, which pushes an
  * integer onto the top of the stack. If the argument is not an integer or

@@ -86,7 +86,7 @@ int get_argument(char *line)
 
 /**
  * process_instruction - Process a single Monty instruction
- * @opcode: The opcode to be processed
+ * @opcode_ptr: The opcode to be processed
  * @line: Monty code line
  * @line_number: Line number in the file
  * @stack: Pointer to the head of the stack
@@ -95,9 +95,6 @@ int get_argument(char *line)
 int process_instruction(
 	char *opcode_ptr, char *line, unsigned int line_number, stack_t **stack)
 {
-
-	printf("Debug2: Opcode = \"%s\"\n", opcode_ptr);
-
 	if (strcmp(opcode_ptr, "push") == 0)
 	{
 		push(stack, line);
