@@ -79,8 +79,6 @@ int get_argument(char *line)
 		arg_value = 0;
 	}
 
-	printf("Debug: Argument = %d\n", arg_value);
-
 	free(line_copy);
 	return (arg_value);
 }
