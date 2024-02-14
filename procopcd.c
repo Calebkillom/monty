@@ -126,10 +126,6 @@ int process_instruction(
 int process_opcode(char *line, unsigned int line_number, stack_t **stack)
 {
 	char *opcode_ptr = get_opcode(line);
-	int args = get_argument(line);
-
-	printf("%d,\n", args);
-	printf("%s\n", opcode_ptr);
 
 	if (opcode_ptr != NULL && opcode_ptr[0] != '#')
 	{
