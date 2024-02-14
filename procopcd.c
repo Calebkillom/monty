@@ -29,10 +29,9 @@ char *get_opcode(char *line)
 	if (opcode_str == NULL)
 	{
 		fprintf(stderr, "Error: strdup failed\n");
+		free(line_copy);
 		exit(EXIT_FAILURE);
 	}
-
-	free(line_copy);
 
 	return (opcode_str);
 }
@@ -79,7 +78,6 @@ int get_argument(char *line)
 		arg_value = 0;
 	}
 
-	free(line_copy);
 	return (arg_value);
 }
 
@@ -122,12 +120,19 @@ int process_instruction(
  */
 int process_opcode(char *line, unsigned int line_number, stack_t **stack)
 {
-	char *opcode_ptr = get_opcode(line);
+	char *opcode_ptr;
+	int result;
+
+	opcode_ptr = get_opcode(line);
+
 
 	if (opcode_ptr != NULL && opcode_ptr[0] != '#')
 	{
-		return (process_instruction(opcode_ptr, line, line_number, stack));
+		result = process_instruction(opcode_ptr, line, line_number, stack);
+		free(opcode_ptr);
+		return (result);
 	}
 
+	free(opcode_ptr);
 	return (1);
 }
